@@ -1,12 +1,19 @@
 var router = require('./lib/router');
 
+var extractParams = require('./lib/params');
+
 // Use the router to register callbacks
 // for paths and HTTP verbs
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
 	res.end('Hello routing!');
 });
 
-router.post('/', (req, res) => {
+app.get('/foo/:bar/fiz/:baz', (req, res) => {
+	res.end(extractParams.reqParams(req));
+	//res.end('Hello routing!');
+});
+
+app.post('/', (req, res) => {
 	var data = req.body;
 
 	// If the content type is JSON
